@@ -1,0 +1,9 @@
+# eureka-server/src/main/resources/application.yml
+spring:
+    application:
+        name: eureka-server
+    cloud:
+        discovery:
+            enabled: true
+    server:
+        port: 8761

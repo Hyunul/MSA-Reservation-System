@@ -1,0 +1,54 @@
+plugins {
+	id 'java'
+	id 'org.springframework.boot' version '3.4.1'
+	id 'io.spring.dependency-management' version '1.1.7'
+}
+
+group = 'com.hyunul'
+version = '0.0.1-SNAPSHOT'
+
+java {
+	toolchain {
+		languageVersion = JavaLanguageVersion.of(17)
+	}
+}
+
+repositories {
+	mavenCentral()
+}
+
+dependencies {
+    // Spring Boot 의존성
+    implementation 'org.springframework.boot:spring-boot-starter-web'    // Spring Web (REST API)
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'  // Spring Data JPA (데이터베이스 연동)
+    implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'  // Thymeleaf (웹 템플릿 엔진, 필요 시)
+    implementation 'org.springframework.boot:spring-boot-devtools'    // Spring Boot DevTools (개발 도구)
+    implementation 'org.springframework.boot:spring-boot-starter-security'  // Spring Security (보안 설정)
+    // implementation 'com.h2database:h2'    // H2 Database (개발용 데이터베이스)
+
+    // Spring Cloud 의존성 (서비스 간 통신 및 Discovery, API Gateway 설정)
+    implementation 'org.springframework.cloud:spring-cloud-starter-netflix-eureka-client' // Eureka 클라이언트 (서비스 디스커버리)
+    implementation 'org.springframework.cloud:spring-cloud-starter-gateway' // API Gateway
+
+    // MySQL 데이터베이스를 사용하려면, H2 대신 MySQL 의존성을 사용할 수 있습니다.
+    implementation 'mysql:mysql-connector-java'
+
+    // Lombok (편리한 Getter/Setter 생성 도구, 선택 사항)
+    implementation 'org.projectlombok:lombok'
+
+    // JUnit5 테스트 의존성
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+
+    // Spring Boot와 Gradle의 호환을 위한 의존성
+    developmentOnly 'org.springframework.boot:spring-boot-devtools'
+}
+
+dependencyManagement {
+    imports {
+        mavenBom "org.springframework.cloud:spring-cloud-dependencies:2023.0.0" // Spring Cloud 의존성 관리
+    }
+}
+
+tasks.named('test') {
+	useJUnitPlatform()
+}

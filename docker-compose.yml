@@ -1,0 +1,41 @@
+version: "3.7"
+
+services:
+    eureka-server:
+        image: eureka-server:latest
+        build:
+            context: ./eureka-server
+        ports:
+            - "8761:8761"
+
+    gateway-service:
+        image: gateway-service:latest
+        build:
+            context: ./gateway-service
+        ports:
+            - "8080:8080"
+
+    reservation-service:
+        image: reservation-service:latest
+        build:
+            context: ./reservation-service
+        ports:
+            - "8081:8081"
+
+    user-service:
+        image: user-service:latest
+        build:
+            context: ./user-service
+        ports:
+            - "8082:8082"
+
+    payment-service:
+        image: payment-service:latest
+        build:
+            context: ./payment-service
+        ports:
+            - "8083:8083"
+
+networks:
+    msa-network:
+        driver: bridge

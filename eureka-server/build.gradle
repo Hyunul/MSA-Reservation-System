@@ -1,0 +1,45 @@
+plugins {
+	id 'java'
+	id 'org.springframework.boot' version '3.4.1'
+	id 'io.spring.dependency-management' version '1.1.7'
+}
+
+group = 'com.hyunul'
+version = '0.0.1-SNAPSHOT'
+
+java {
+	toolchain {
+		languageVersion = JavaLanguageVersion.of(17)
+	}
+}
+
+repositories {
+	mavenCentral()
+}
+
+dependencies {
+    // Spring Boot 의존성
+    implementation 'org.springframework.boot:spring-boot-starter-web'  // Spring Web (REST API)
+    implementation 'org.springframework.boot:spring-boot-starter-actuator'  // Spring Boot Actuator (애플리케이션 상태 모니터링)
+    
+    // Spring Cloud 의존성
+    implementation 'org.springframework.cloud:spring-cloud-starter-netflix-eureka-server'  // Eureka Server 의존성
+
+    // Spring Boot DevTools (개발 중에 자동 재시작, 디버깅 등 제공)
+    developmentOnly 'org.springframework.boot:spring-boot-devtools'
+
+    // JUnit5 테스트 의존성
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+
+    // Spring Boot와 Gradle의 호환을 위한 의존성
+}
+
+dependencyManagement {
+    imports {
+        mavenBom "org.springframework.cloud:spring-cloud-dependencies:2023.0.0" // Spring Cloud 의존성 관리
+    }
+}
+
+tasks.named('test') {
+	useJUnitPlatform()
+}
